@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class SelectQueryResults extends Component {
 	constructor(props){
 		super(props);
@@ -19,12 +18,7 @@ class SelectQueryResults extends Component {
 				this.rows.push(columns);
 			});
 		}
-
-		this.state = {
-			/*number : 0*/
-		}
 	}
-
 	render() {
 		return (
 			<div className="tableContainer">

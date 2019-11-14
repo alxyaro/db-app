@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import './App.css';
 import SelectQueryResults from "./SelectQueryResults";
 
+const helper = window.createDbHelper();
+
+helper.getConnection().then(async conn => {
+	await helper.testQuery(conn);
+	conn.close();
+});
+
 class App extends Component {
 	constructor(props){
 		super(props);

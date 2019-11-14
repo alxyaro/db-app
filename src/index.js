@@ -10,14 +10,3 @@ ReactDOM.render(
     <App />,
 	rootEl
 );
-
-if (module.hot) {
-	console.log('HOT');
-	module.hot.accept('./App', () => {
-		const NextApp = require('./App').default
-		ReactDOM.render(
-			<NextApp />,
-			rootEl
-		)
-	})
-}

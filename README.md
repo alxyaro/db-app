@@ -3,7 +3,9 @@ Run `npm install`
 
 ## Running
 
-Run `npm-start`
+Run `npm run dev`
+
+**Due to the current setup, the browser version (localhost:3000) will not work!**
 
 ## Making Changes
 
