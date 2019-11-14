@@ -10,8 +10,11 @@ class App extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			loggedIn: false
-		}
+			loggedIn: false,
+			dbData: null
+		};
+		this.loginComponent = React.createRef();
+		this.attemptLogin = this.attemptLogin.bind(this);
 	}
 
 	render() {
@@ -19,7 +22,7 @@ class App extends Component {
 			<div className="App">
 				<div className="container">
 					{!this.state.loggedIn &&
-					<Login attemptLogin={this.attemptLogin}/>
+					<Login attemptLogin={this.attemptLogin} ref={this.loginComponent}/>
 					}
 					{this.state.loggedIn &&
 					<MainInterface/>
@@ -34,7 +37,12 @@ class App extends Component {
 	}
 
 	attemptLogin(data) {
-		console.log(data);
+		dbHelper.getConnection(data.user, data.pass, data.host, data.sid).then(conn => {
+			this.setState({loggedIn: true, dbData: data});
+			conn.close();
+		}).catch(e => {
+			this.loginComponent.current.loginError(e);
+		});
 	}
 }
 

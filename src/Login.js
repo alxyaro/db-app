@@ -9,9 +9,12 @@ class SelectQueryResults extends Component {
 			user: '',
 			pass: '',
 			hostname: 'localhost',
-			sid: 'xe'
+			sid: 'xe',
+			loggingIn: false,
+			error: null
 		};
 		this.attemptLogin = this.attemptLogin.bind(this);
+		this.loginError = this.loginError.bind(this);
 	}
 	render() {
 		return (
@@ -20,6 +23,11 @@ class SelectQueryResults extends Component {
 					<img className="mb-4" src={logo} alt=""
 					     width="72" height="72"/>
 					<h1 className="h3 mb-3 font-weight-normal">Login to Oracle</h1>
+					{this.state.error != null &&
+					<div className="alert alert-danger" role="alert">
+						{this.state.error}
+					</div>
+					}
 					<label htmlFor="input1">Username</label>
 					<input type="text" id="input1" className="form-control" placeholder="Username" onChange={event=>this.setState({user:event.target.value})}/>
 					<label htmlFor="input2">Password</label>
@@ -33,18 +41,22 @@ class SelectQueryResults extends Component {
 						<input type="text" id="input4" className="form-control" placeholder="SID" value={this.state.sid} onChange={event=>this.setState({sid:event.target.value})}/>
 					</div>
 					}
-					<button className="btn btn-lg btn-success btn-block" type="submit" onClick={this.attemptLogin}>Login</button>
+					<button className="btn btn-lg btn-success btn-block" type="submit" onClick={this.attemptLogin} disabled={this.state.loggingIn}>Login</button>
 				</form>
 			</div>
 		);
 	}
 	attemptLogin() {
+		this.setState({loggingIn: true});
 		this.props.attemptLogin({
 			user: this.state.user,
 			pass: this.state.pass,
 			host: this.state.hostname,
 			sid: this.state.sid
 		});
+	}
+	loginError(e) {
+		this.setState({loggingIn: false, error: "Failed to login: "+e.message});
 	}
 }
 
