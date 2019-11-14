@@ -37,3 +37,22 @@ table {
 	border-radius: 5px;
 	border: 5px solid black;
 }
+
+.login-form {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.login-form input {
+	margin-bottom: 10px;
+}
+
+.login-form label {
+	display: block;
+	height: 15px;
+	font-size: 14px;
+}
+
+.login-form .more-options {
+	padding-top: 10px;
+}

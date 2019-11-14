@@ -18,11 +18,11 @@
 		function createDbHelper() {
 			const oracledb = require('oracledb');
 			return {
-				getConnection: function() {
+				getConnection: function(user,pass,host = 'localhost',sid = 'xe') {
 					return oracledb.getConnection(  {
-						user          : "system",
-						password      : "1234",
-						connectString : "localhost:1521/xe"
+						user          : user,
+						password      : pass,
+						connectString : host+":1521/"+sid
 					})
 				},
 				testQuery: async function(conn) {
