@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './electron.png';
 
-class SelectQueryResults extends Component {
+class Login extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -60,4 +60,4 @@ class SelectQueryResults extends Component {
 	}
 }
 
-export default SelectQueryResults;
+export default Login;
