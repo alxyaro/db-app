@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ScrollArea from 'react-scrollbar';
+
 class SelectQueryResults extends Component {
 	constructor(props){
 		super(props);
@@ -11,27 +13,34 @@ class SelectQueryResults extends Component {
 				this.headerRows.push(<th>{obj.name}</th>);
 			});
 			this.props.result.rows.forEach(row => {
-				var columns = [];
-				const result = row.forEach(item => {
+				const columns = [];
+				row.forEach(item => {
 					columns.push(<td>{item}</td>);
 				});
-				this.rows.push(columns);
+				this.rows.push(<tr>{columns}</tr>);
 			});
 		}
 	}
 	render() {
 		return (
 			<div className="tableContainer">
-				<table className="table">
-					<thead>
-					<tr>
-						{this.headerRows}
-					</tr>
-					</thead>
-					<tbody>
-					{this.rows}
-					</tbody>
-				</table>
+				<ScrollArea
+					speed={0.8}
+					className="area"
+					contentClassName="content"
+					horizontal={true}
+				>
+					<table className="table">
+						<thead>
+						<tr>
+							{this.headerRows}
+						</tr>
+						</thead>
+						<tbody>
+						{this.rows}
+						</tbody>
+					</table>
+				</ScrollArea>
 			</div>
 		);
 	}
