@@ -16,20 +16,28 @@
 	<title>React App</title>
 	<script type="text/javascript">
 		function createDbHelper() {
-			const oracledb = require('oracledb');
-			return {
-				getConnection: function(user,pass,host = 'localhost',sid = 'xe') {
-					return oracledb.getConnection(  {
-						user          : user,
-						password      : pass,
-						connectString : host+":1521/"+sid
-					})
-				},
-				testQuery: async function(conn) {
-					const result = await conn.execute('SELECT * FROM ACCOUNT');
-					console.log(result);
+			if (typeof require === 'function') {
+				const oracledb = require('oracledb');
+				return {
+					getConnection: function(user,pass,host = 'localhost',sid = 'xe') {
+						return oracledb.getConnection(  {
+							user          : user,
+							password      : pass,
+							connectString : host+":1521/"+sid
+						})
+					},
+					testQuery: async function(conn) {
+						const result = await conn.execute('SELECT * FROM ACCOUNT');
+						console.log(result);
+					}
+				};
+			} else {
+				return {
+					getConnection: function(a,b,c,d) {
+						return Promise.reject(new Error("Unable to connect to database without electron."));
+					}
 				}
-			};
+			}
 		}
 	</script>
 </head>

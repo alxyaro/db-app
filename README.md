@@ -5,7 +5,7 @@ Run `npm install`
 
 Run `npm run dev`
 
-**Due to the current setup, the browser version (localhost:3000) will not work!**
+**Oracle login will not work in the browser due to a lack of Node.js presence - use the electron app!**
 
 ## Making Changes
 
