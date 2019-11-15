@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './main.css';
 import Login from "./Login";
 import MainInterface from "./MainInterface";
+import ScrollArea from 'react-scrollbar';
 
 const dbHelper = window.createDbHelper();
 
@@ -19,20 +20,18 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
-				<div className="container">
-					{!this.state.loggedIn &&
-					<Login attemptLogin={this.attemptLogin} ref={this.loginComponent}/>
-					}
-					{this.state.loggedIn &&
-					<MainInterface/>
-					}
+			<ScrollArea className="app-container" smoothScrolling={true}>
+				<div className="app">
+					<div className="container">
+						{!this.state.loggedIn &&
+						<Login attemptLogin={this.attemptLogin} ref={this.loginComponent}/>
+						}
+						{this.state.loggedIn &&
+						<MainInterface/>
+						}
+					</div>
 				</div>
-				{/*<p className="App-intro">
-					The current value of number is {this.state.number}
-				</p>
-				<button onClick={()=>this.setState({number : this.state.number + 1})}>+</button>*/}
-			</div>
+			</ScrollArea>
 		);
 	}
 
