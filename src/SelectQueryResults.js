@@ -15,7 +15,7 @@ class SelectQueryResults extends Component {
 			this.props.result.rows.forEach(row => {
 				const columns = [];
 				row.forEach(item => {
-					columns.push(<td>{item != null ? item.toString() : <i>NULL</i>}</td>);
+					columns.push(<td><div>{item != null ? item.toString() : <i>NULL</i>}</div></td>);
 				});
 				this.rows.push(<tr>{columns}</tr>);
 			});

@@ -23,12 +23,25 @@
 	border-color: gray;
 }
 
+.sqlQuery {
+	margin-bottom: 25px;
+}
+
 code {
 	display: block;
 	background: #111111;
 	padding: 10px;
 	border-radius: 5px;
-	margin-bottom: 16px;
+	margin-bottom: 10px;
+	color: #c7c7c7 !important;
+}
+
+code.queryResult.success {
+	color: #41c72c !important;
+}
+
+code.queryResult.error {
+	color: #c74346 !important;
 }
 
 table {
@@ -46,6 +59,7 @@ table {
 
 .tableContainer .content {
 	display: table;
+	min-width: 100%;
 }
 
 .tableContainer table {
@@ -64,6 +78,11 @@ table {
 	background: #191919;
 	font-size: 14px;
 	border-top: 1px dashed #373737 !important;
+}
+
+.tableContainer td div {
+	max-height: 150px;
+	overflow: hidden;
 }
 
 .login-form {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './main.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 import Login from "./Login";
 import MainInterface from "./MainInterface";
-import ScrollArea from 'react-scrollbar';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import SelectQueryResults from "./SelectQueryResults";
 
 import db_queries from './db_queries.js';
@@ -24,7 +25,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<ScrollArea className="app-container" smoothScrolling={true}>
+			<PerfectScrollbar className="app-container">
 				<div className="app">
 					<div className="container">
 						{!this.state.loggedIn &&
@@ -35,7 +36,7 @@ class App extends Component {
 						}
 					</div>
 				</div>
-			</ScrollArea>
+			</PerfectScrollbar>
 		);
 	}
 
@@ -63,14 +64,14 @@ class App extends Component {
 				const result = await conn.execute(query);
 				console.log(result);
 				if (result.hasOwnProperty('rowsAffected')) {
-					innerResults.push(<code className="queryResult success">Success: {result.rowsAffected} row(s) affected.</code>);
+					innerResults.push(<code className="queryResult success">Success: {query.startsWith("DROP") ? "dropped." : result.rowsAffected+" row(s) affected."}</code>);
 				} else {
 					innerResults.push(<SelectQueryResults result={result} />);
 				}
 			} catch (e) {
 				innerResults.push(<code className="queryResult error">Error: {e.message}</code>);
 			}
-			results.push(<div className="dbResult">{innerResults}</div>);
+			results.push(<div className="sqlQuery">{innerResults}</div>);
 		}
 		return results;
 	}
