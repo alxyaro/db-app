@@ -73,6 +73,7 @@ class App extends Component {
 			}
 			results.push(<div className="sqlQuery">{innerResults}</div>);
 		}
+		conn.close();
 		return results;
 	}
 }
