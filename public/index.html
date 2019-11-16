@@ -18,6 +18,7 @@
 		function createDbHelper() {
 			if (typeof require === 'function') {
 				const oracledb = require('oracledb');
+				oracledb.autoCommit = true;
 				return {
 					getConnection: function(user,pass,host = 'localhost',sid = 'xe') {
 						return oracledb.getConnection(  {
@@ -25,10 +26,6 @@
 							password      : pass,
 							connectString : host+":1521/"+sid
 						})
-					},
-					testQuery: async function(conn) {
-						const result = await conn.execute('SELECT * FROM ACCOUNT');
-						console.log(result);
 					}
 				};
 			} else {

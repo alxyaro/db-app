@@ -15,7 +15,7 @@ class SelectQueryResults extends Component {
 			this.props.result.rows.forEach(row => {
 				const columns = [];
 				row.forEach(item => {
-					columns.push(<td>{item}</td>);
+					columns.push(<td>{item != null ? item.toString() : <i>NULL</i>}</td>);
 				});
 				this.rows.push(<tr>{columns}</tr>);
 			});
@@ -37,7 +37,7 @@ class SelectQueryResults extends Component {
 						</tr>
 						</thead>
 						<tbody>
-						{this.rows}
+							{this.rows}
 						</tbody>
 					</table>
 				</ScrollArea>

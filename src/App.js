@@ -4,11 +4,14 @@ import './main.css';
 import Login from "./Login";
 import MainInterface from "./MainInterface";
 import ScrollArea from 'react-scrollbar';
+import SelectQueryResults from "./SelectQueryResults";
+
+import db_queries from './db_queries.js';
 
 const dbHelper = window.createDbHelper();
 
 class App extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			loggedIn: false,
@@ -16,6 +19,7 @@ class App extends Component {
 		};
 		this.loginComponent = React.createRef();
 		this.attemptLogin = this.attemptLogin.bind(this);
+		this.executeSql = this.executeSql.bind(this);
 	}
 
 	render() {
@@ -27,7 +31,7 @@ class App extends Component {
 						<Login attemptLogin={this.attemptLogin} ref={this.loginComponent}/>
 						}
 						{this.state.loggedIn &&
-						<MainInterface/>
+						<MainInterface executeSql={this.executeSql}/>
 						}
 					</div>
 				</div>
@@ -42,6 +46,33 @@ class App extends Component {
 		}).catch(e => {
 			this.loginComponent.current.loginError(e);
 		});
+	}
+
+	async executeSql(scriptId) {
+		const data = this.state.dbData;
+		if (!db_queries.hasOwnProperty(scriptId))
+			throw new Error("Invalid script ID.");
+		let queries = db_queries[scriptId].split(";").map(query => query.replace(/\r?\n/g, ' ').trim()).filter(item => item.length > 0 && !item.startsWith('--'));
+		const results = [];
+		const conn = await dbHelper.getConnection(data.user, data.pass, data.host, data.sid);
+		for (let i = 0; i < queries.length; i++) {
+			const query = queries[i];
+			const innerResults = [];
+			innerResults.push(<code className="query">&gt; {query}</code>);
+			try {
+				const result = await conn.execute(query);
+				console.log(result);
+				if (result.hasOwnProperty('rowsAffected')) {
+					innerResults.push(<code className="queryResult success">Success: {result.rowsAffected} row(s) affected.</code>);
+				} else {
+					innerResults.push(<SelectQueryResults result={result} />);
+				}
+			} catch (e) {
+				innerResults.push(<code className="queryResult error">Error: {e.message}</code>);
+			}
+			results.push(<div className="dbResult">{innerResults}</div>);
+		}
+		return results;
 	}
 }
 

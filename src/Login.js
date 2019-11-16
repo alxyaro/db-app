@@ -24,8 +24,11 @@ class Login extends Component {
 					     width="72" height="72"/>
 					<h1 className="h3 mb-3 font-weight-normal">Login to Oracle</h1>
 					{this.state.error != null &&
-					<div className="alert alert-danger" role="alert">
+					<div className="alert alert-danger alert-dismissible fade show" role="alert">
 						{this.state.error}
+						<button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => this.setState({error: null})}>
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 					}
 					<label htmlFor="input1">Username</label>
