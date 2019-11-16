@@ -1,7 +1,11 @@
 # Installation
 Run `npm install`
 
-## Running
+## Running Application
+
+Run `npm run electron`
+
+## Running While Developing
 
 Run `npm run dev`
 

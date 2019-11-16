@@ -103,3 +103,7 @@ table {
 .login-form .more-options {
 	padding-top: 10px;
 }
+
+.clearButton {
+	float: right;
+}

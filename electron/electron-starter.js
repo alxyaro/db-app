@@ -13,7 +13,7 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600, webPreferences: { nodeIntegration: true }});
+    mainWindow = new BrowserWindow({width: 800, height: 600, webPreferences: { nodeIntegration: true }, icon: __dirname+'/logo.ico'});
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -24,6 +24,7 @@ function createWindow() {
     mainWindow.loadURL(startUrl);
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
+	mainWindow.removeMenu();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {

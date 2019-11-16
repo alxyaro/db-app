@@ -23,7 +23,7 @@ class MainInterface extends Component {
 					<button className="btn btn-warning" disabled>Lookup Movies</button>
 				</div>
 				<div className="col-9">
-					<h3>Output</h3>
+					<h3>Output<button className="btn btn-sm btn-outline-light clearButton" disabled={this.state.output == null} onClick={() => this.setState({output: null})}>Clear</button></h3>
 					{this.state.error != null && <div className="alert alert-danger alert-dismissible fade show" role="alert">
 						{this.state.error}
 						<button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => this.setState({error: null})}>

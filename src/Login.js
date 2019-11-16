@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './electron.png';
+import logo from './logo.png';
 
 class Login extends Component {
 	constructor(props){
