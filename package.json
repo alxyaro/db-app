@@ -4,10 +4,11 @@
   "private": true,
   "devDependencies": {
     "electron": "^6.0.2",
+    "electron-packager": "^14.1.0",
     "electron-rebuild": "^1.8.6",
     "foreman": "^2.0.0",
-    "react-scripts": "3.2.0",
-    "nan": "^2.8"
+    "nan": "^2.8",
+    "react-scripts": "3.2.0"
   },
   "dependencies": {
     "oracledb": "^4.0.1",
@@ -25,7 +26,8 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "dev": "nf start -p 3000",
-    "postinstall": "electron-rebuild -f -w oracledb"
+    "postinstall": "electron-rebuild -f -w oracledb",
+    "deploy": "electron-packager . db-app --platform=win32,linux --asar --out=dist --icon=electron/logo.ico"
   },
   "browserslist": {
     "production": [
